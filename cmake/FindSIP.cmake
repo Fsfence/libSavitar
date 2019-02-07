@@ -29,8 +29,7 @@ if(APPLE)
     set(CMAKE_FIND_FRAMEWORK LAST)
 endif()
 
-find_package(PythonInterp 3.4.0 REQUIRED)
-find_package(PythonLibs 3.4.0 REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
 IF(SIP_VERSION)
   # Already in cache, be silent
@@ -40,7 +39,7 @@ ELSE(SIP_VERSION)
   FIND_FILE(_find_sip_py FindSIP.py PATHS ${CMAKE_MODULE_PATH})
 
   SET(ENV{PYTHONPATH} ${CMAKE_INSTALL_PREFIX}/${PYTHON_SITE_PACKAGES_DIR})
-  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${_find_sip_py}
+  EXECUTE_PROCESS(COMMAND ${Python3_EXECUTABLE} ${_find_sip_py}
                   OUTPUT_VARIABLE sip_config
                   RESULT_VARIABLE sip_config_returncode)
   IF(sip_config_returncode EQUAL 0)

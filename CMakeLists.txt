@@ -7,7 +7,6 @@ include(CMakePackageConfigHelpers)
 option(BUILD_PYTHON "Build " ON)
 option(BUILD_STATIC "Build as a static library" OFF)
 
-
 add_subdirectory(pugixml)
 
 if(BUILD_PYTHON)
@@ -20,9 +19,9 @@ if(BUILD_PYTHON)
         # Running on a debian-based system, which requires special handling for python modules.
         set(PYTHON_SITE_PACKAGES_DIR lib${LIB_SUFFIX}/python3/dist-packages CACHE STRING "Directory to install Python bindings to")
     else()
-        set(PYTHON_SITE_PACKAGES_DIR lib${LIB_SUFFIX}/python${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}/site-packages CACHE STRING "Directory to install Python bindings to")
+        set(PYTHON_SITE_PACKAGES_DIR lib${LIB_SUFFIX}/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}/site-packages CACHE STRING "Directory to install Python bindings to")
     endif()
-    include_directories(python/ src/ ${SIP_INCLUDE_DIR} ${PYTHON_INCLUDE_DIR})
+    include_directories(python/ src/ ${SIP_INCLUDE_DIR} ${Python3_INCLUDE_DIRS})
 endif()
 
 if(NOT ${CMAKE_VERSION} VERSION_LESS 3.1)
